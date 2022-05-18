@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@CrossOrigin
 @RestController
 @RequestMapping(value = "/api/posts", headers = "Accept=application/json")
 public class PostsController {
@@ -39,7 +40,12 @@ public class PostsController {
 
     @PutMapping("{id}")
     public void updatePost(@PathVariable Long id, @RequestBody Post updatedPost) {
-        System.out.println(updatedPost);
+        for (Post post : posts){
+            if (post.getId().equals(id)){
+                post.setContent(updatedPost.getContent());
+                post.setTitle(updatedPost.getTitle());
+            }
+        }
     }
 
     @DeleteMapping("{id}")

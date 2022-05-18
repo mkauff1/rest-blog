@@ -1,21 +1,34 @@
 package com.example.restblog.data;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class User {
     private long id;
     private String username;
     private String email;
     private String password;
-    private Date createdAt;
-    private Role role;
+    private LocalDateTime createdAt = LocalDateTime.now();
+    private Role role = Role.USER;
 
     public enum Role {USER, ADMIN};
 
     public User() {
     }
 
-    public User(long id, String username, String email, String password, Date createdAt, Role role) {
+    public User(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+
+    public User(long id, String username, String email, String password) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
+
+    public User(long id, String username, String email, String password, LocalDateTime createdAt, Role role) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -56,11 +69,11 @@ public class User {
         this.password = password;
     }
 
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 

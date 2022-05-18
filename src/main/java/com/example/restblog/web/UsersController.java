@@ -19,15 +19,15 @@ public class UsersController {
 
     @GetMapping
     public List<User> getAll() {
-        users.add(new User(1L, "mkauff", "mkauff@gmail.com", "password", 010101, ADMIN);
-        users.add(new User(2L, "ryGuy", "ryGuy@gmail.com", "RysTheMan", 2021, USER));
-        users.add(new User(3L, "casey1", "casey1@gmail.com", "mrRogers", 2019, ADMIN));
+        users.add(new User("mkauff", "mkauff@gmail.com", "password"));
+        users.add(new User("ryGuy", "ryGuy@gmail.com", "RysTheMan"));
+        users.add(new User("casey1", "casey1@gmail.com", "mrRogers"));
 
         return users;
     }
 
     @GetMapping("{id}")
-    public User getById(@PathVariable Long id) {
+    public User getUserById(@PathVariable Long id) {
         for (User user : getAll()) {
             if (Objects.equals(user.getId(), id)) {
                 return user;
@@ -44,7 +44,7 @@ public class UsersController {
     @PutMapping("{id}")
     public void updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
         for (User user : users){
-            if (user.getId().equals(id)){
+            if (user.getId() == (id)){
                 user.setUsername(updatedUser.getUsername());
                 user.setEmail(updatedUser.getEmail());
                 user.setPassword(updatedUser.getPassword());

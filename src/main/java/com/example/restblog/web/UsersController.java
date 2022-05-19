@@ -41,6 +41,18 @@ public class UsersController {
         System.out.println(userToAdd);
     }
 
+    @GetMapping("username")
+    public User getByUsername(@RequestParam String username){
+        System.out.println("Getting user with username: " + username);
+        return null;
+    }
+
+    @GetMapping("email")
+    public User getByEmail(@RequestParam String email) {
+        System.out.println("Getting user with email: " + email);
+        return null;
+    }
+
     @PutMapping("{id}")
     public void updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
         for (User user : users){

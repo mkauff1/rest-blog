@@ -44,6 +44,15 @@ export default function router(URI) {
             title: 'All Posts',
             viewEvent:PostsEvent
         },
+        '/user': {
+          returnView: UserIndex,
+          state: {
+              user: '/api/users/1'
+          },
+          uri: 'users',
+          title: 'User',
+          viewEvent: UserEvent
+        },
         '/about': {
             returnView: About,
             state: {},

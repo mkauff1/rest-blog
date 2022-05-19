@@ -26,7 +26,7 @@ export default function Register(){
 
 export function RegisterEvent(){
     $(document).on('click', '#register-btn', function(e){
-        const newUser = {
+        const reqBody = {
             username: $(`#username`).val(),
             email: $('#email').val(),
             password: $('#password').val()
@@ -34,7 +34,7 @@ export function RegisterEvent(){
 
         const options = {
             headers: {
-                "COntent-Type": "application/json"
+                "Content-Type": "application/json"
             },
             method: 'POST',
             body: JSON.stringify(reqBody)

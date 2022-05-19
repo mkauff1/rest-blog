@@ -1,3 +1,7 @@
+import createView from "../createView.js";
+
+const BASE_URL = "http://localhost:8080/api/users"
+
 export default function UserIndex(props) {
     //language=HTML
     return `
@@ -10,7 +14,7 @@ export default function UserIndex(props) {
                 <input disabled id="email" name="email" type="email" value="${props.user.email}">
                 <label for="new-password">New Password</label>
                 <input id="new-password" name="new-password" type="password" value="this is not your real password"/>
-                <button id="change-password-button" data-id="$${props.user.id}" type="button">Change Password</button>
+                <button id="change-password-button" data-id="${props.user.id}" type="submit">Change Password</button>
             </form>
         </main>`
 }
@@ -33,8 +37,10 @@ function addUpdatePasswordListener() {
         fetch(`${BASE_URL}/${id}/updatePassword?newPassword=${newPassword}`, request)
             .then(res => {
                 console.log(res.status);
-            }).then(data => {
-                console.log(data);
-            }).catch(err => console.log(err));
+            }).catch(err => {
+                console.log(err);
+            }).finally(() => {
+            createView("/user")
+        })
     })
 }

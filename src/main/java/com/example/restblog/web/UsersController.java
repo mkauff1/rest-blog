@@ -3,12 +3,11 @@ package com.example.restblog.web;
 import com.example.restblog.data.User;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import static com.example.restblog.data.User.Role.ADMIN;
-import static com.example.restblog.data.User.Role.USER;
 
 @CrossOrigin
 @RestController
@@ -36,11 +35,6 @@ public class UsersController {
         return new User();
     }
 
-    @PostMapping
-    public void createUser(@RequestBody User userToAdd){
-        System.out.println(userToAdd);
-    }
-
     @GetMapping("username")
     public User getByUsername(@RequestParam String username){
         System.out.println("Getting user with username: " + username);
@@ -51,6 +45,11 @@ public class UsersController {
     public User getByEmail(@RequestParam String email) {
         System.out.println("Getting user with email: " + email);
         return null;
+    }
+
+    @PostMapping
+    public void createUser(@RequestBody User userToAdd){
+        System.out.println(userToAdd);
     }
 
     @PutMapping("{id}")
@@ -64,6 +63,11 @@ public class UsersController {
                 user.setRole(updatedUser.getRole());
             }
         }
+    }
+
+    //
+    private void updatePassword(@PathVariable Long id, @RequestParam(required = false) String oldPassword, @Valid @Size(min = 3) @RequestParam String newPassword) {
+        System.out.println("Updating user password");
     }
 
     @DeleteMapping("{id}")

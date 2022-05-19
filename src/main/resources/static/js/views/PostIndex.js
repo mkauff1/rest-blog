@@ -12,11 +12,13 @@ export default function PostIndex(props) {
         </header>
         <main>
             <div id="posts-container">
-                ${props.posts.map(post => {`<h3> id="title-${post.id}">${post.title}</h3>`
-                                            `<p id="content-${post.id}">${post.content}</p>
+                ${props.posts.map(post => 
+                //language=HTML
+                    `<h3> id="title-${post.id}">${post.title}</h3>`
+                    `<p id="content-${post.id}">${post.content}</p>
                 <button type="submit" class="btn btn-primary edit-button" data-id="${post.id}">Edit</button>
                 <button type="submit" class="btn btn-danger delete-button" data-id="${post.id}">Delete</button>
-                `}).join('')}   
+                `).join('')}   
             </div>
             <div id="add-post-form">
                 <div>

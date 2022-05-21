@@ -1,6 +1,7 @@
 package com.example.restblog.data;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class User {
@@ -10,7 +11,7 @@ public class User {
     private String password;
     private LocalDateTime createdAt = LocalDateTime.now();
     private Role role = Role.USER;
-    private Collection<Post> posts;
+    private Collection<Post> posts = new ArrayList<>();
 
     public enum Role {USER, ADMIN};
 

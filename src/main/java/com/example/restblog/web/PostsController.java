@@ -4,6 +4,7 @@ import com.example.restblog.data.Post;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,6 +12,12 @@ import java.util.Objects;
 @RestController
 @RequestMapping(value = "/api/posts", headers = "Accept=application/json")
 public class PostsController {
+
+//    private final UserService userService;
+//
+//    public PostsController(UserService userService){
+//        this.userService = userService
+//    }
 
     List<Post> posts = new ArrayList<>();
 
@@ -33,6 +40,10 @@ public class PostsController {
         return new Post();
     }
 
+    @GetMapping("{username}")
+    public Collection<Post> getByUser(@PathVariable String username){
+
+    }
     @PostMapping
     public void createPost(@RequestBody Post postToAdd){
         System.out.println(postToAdd);

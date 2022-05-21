@@ -38,6 +38,11 @@ public class UsersController {
     @GetMapping("username")
     public User getByUsername(@RequestParam String username){
         System.out.println("Getting user with username: " + username);
+        for(User user : users){
+            if (user.getUsername().equals(username)){
+                return user;
+            }
+        };
         return null;
     }
 

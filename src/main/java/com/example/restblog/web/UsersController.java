@@ -1,11 +1,12 @@
 package com.example.restblog.web;
 
+import com.example.restblog.data.Post;
 import com.example.restblog.data.User;
+import com.example.restblog.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -14,36 +15,27 @@ import java.util.Objects;
 @RequestMapping(value = "/api/users", headers = "Accept=application/json")
 public class UsersController {
 
-    List<User> users = new ArrayList<>();
+    //List<User> users = new ArrayList<>();
+    private final UserService userService;
+
+    public UsersController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping
     public List<User> getAll() {
-        users.add(new User("mkauff", "mkauff@gmail.com", "password"));
-        users.add(new User("ryGuy", "ryGuy@gmail.com", "RysTheMan"));
-        users.add(new User("casey1", "casey1@gmail.com", "mrRogers"));
-
-        return users;
+        return userService.getUserList();
     }
 
     @GetMapping("{id}")
-    public User getUserById(@PathVariable Long id) {
-        for (User user : getAll()) {
-            if (Objects.equals(user.getId(), id)) {
-                return user;
-            }
-        }
-        return new User();
+    public User getById(@PathVariable Long id) {
+        return userService.getUserById(id);
     }
 
     @GetMapping("username")
     public User getByUsername(@RequestParam String username){
         System.out.println("Getting user with username: " + username);
-        for(User user : users){
-            if (user.getUsername().equals(username)){
-                return user;
-            }
-        };
-        return null;
+        return userService.getUserByUsername(username);
     }
 
     @GetMapping("email")
@@ -54,12 +46,18 @@ public class UsersController {
 
     @PostMapping
     public void createUser(@RequestBody User userToAdd){
-        System.out.println(userToAdd);
+        userService.getUserList().add(userToAdd);
+    }
+
+    @PostMapping("{username}")
+    public void addUserPost(@PathVariable String username, @RequestBody Post newPost){
+        User user = userService.getUserByUsername(username);
+        user.getPosts().add(newPost);
     }
 
     @PutMapping("{id}")
     public void updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
-        for (User user : users){
+        for (User user : userService.getUserList()){
             if (user.getId() == (id)){
                 user.setUsername(updatedUser.getUsername());
                 user.setEmail(updatedUser.getEmail());
@@ -72,7 +70,9 @@ public class UsersController {
 
     //
     private void updatePassword(@PathVariable Long id, @RequestParam(required = false) String oldPassword, @Valid @Size(min = 3) @RequestParam String newPassword) {
-        System.out.println("Updating user password");
+        User userToUpdate = getById(id);
+        userToUpdate.setPassword(newPassword);
+        System.out.println(userToUpdate.getPassword());
     }
 
     @DeleteMapping("{id}")

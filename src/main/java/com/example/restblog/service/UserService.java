@@ -28,14 +28,15 @@ public class UserService {
         posts.add(newPost);
     }
 
-    public User getUserById(Long id){
-        for (User user : userList) {
-            if (user.getId().equals(id)){
-                return user;
-            }
-        }
-        return null;
-    }
+    // TODO: .equals does not want to work
+//    public User getUserById(Long id){
+//        for (User user : userList) {
+//            if (user.getId().equals(id)){
+//                return user;
+//            }
+//        }
+//        return null;
+//    }
 
     public User getUserByUsername(String username){
         for (User user : userList){

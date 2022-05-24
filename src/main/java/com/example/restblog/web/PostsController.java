@@ -15,7 +15,7 @@ public class PostsController {
     private final UserService userService;
 
     public PostsController(UserService userService){
-        this.userService = userService
+        this.userService = userService;
     }
 
     //List<Post> posts = new ArrayList<>();

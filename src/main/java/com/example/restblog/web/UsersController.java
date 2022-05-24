@@ -55,18 +55,18 @@ public class UsersController {
         user.getPosts().add(newPost);
     }
 
-    @PutMapping("{id}")
-    public void updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
-        for (User user : userService.getUserList()){
-            if (user.getId() == (id)){
-                user.setUsername(updatedUser.getUsername());
-                user.setEmail(updatedUser.getEmail());
-                user.setPassword(updatedUser.getPassword());
-                user.setCreatedAt(updatedUser.getCreatedAt());
-                user.setRole(updatedUser.getRole());
-            }
-        }
-    }
+//    @PutMapping("{id}")
+//    public void updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
+//        for (User user : userService.getUserList()){
+//            if (user.getId() == (id)){
+//                user.setUsername(updatedUser.getUsername());
+//                user.setEmail(updatedUser.getEmail());
+//                user.setPassword(updatedUser.getPassword());
+//                user.setCreatedAt(updatedUser.getCreatedAt());
+//                user.setRole(updatedUser.getRole());
+//            }
+//        }
+//    }
 
     //
     private void updatePassword(@PathVariable Long id, @RequestParam(required = false) String oldPassword, @Valid @Size(min = 3) @RequestParam String newPassword) {

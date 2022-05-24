@@ -1,9 +1,11 @@
 package com.example.restblog.data;
 
+import javax.persistence.Entity;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 
+@Entity
 public class User {
     private long id;
     private String username;

@@ -1,6 +1,7 @@
 package com.example.restblog.web;
 
 import com.example.restblog.data.Post;
+import com.example.restblog.service.EmailService;
 import com.example.restblog.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +19,11 @@ public class PostsController {
         this.userService = userService;
     }
 
-    //List<Post> posts = new ArrayList<>();
+    private final EmailService emailService;
+
+    public PostsController(EmailService emailService) {
+        this.emailService = emailService;
+    }
 
     @GetMapping
     public List<Post> getAll() {

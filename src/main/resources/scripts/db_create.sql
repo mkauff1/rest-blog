@@ -4,12 +4,12 @@ CREATE DATABASE if not exists blog_db;
 
 # CREATE USER casey_blog@localhost IDENTIFIED BY 'codeup12';
 
-GRANT ALL ON blog_db.* TO casey_blog@localhost;
+# GRANT ALL ON blog_db.* TO casey_blog@localhost;
 
 USE blog_db;
 
 
-CREATE TABLE users
+CREATE TABLE if not exists users
 (
     id       BIGINT       NOT NULL AUTO_INCREMENT,
     username VARCHAR(60)  NOT NULL,
@@ -20,7 +20,7 @@ CREATE TABLE users
 
 );
 
-CREATE TABLE posts
+CREATE TABLE if not exists posts
 (
     id      BIGINT       NOT NULL AUTO_INCREMENT,
     user_id BIGINT       NOT NULL,
@@ -30,19 +30,19 @@ CREATE TABLE posts
     FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
-CREATE TABLE tags
+CREATE TABLE if not exists categories
 (
     id   INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(100),
     PRIMARY KEY (id)
 );
 
-CREATE TABLE post_tags
+CREATE TABLE if not exists post_category
 (
     id      BIGINT NOT NULL AUTO_INCREMENT,
     post_id BIGINT NOT NULL,
-    tag_id  INT    NOT NULL,
+    category_id  INT    NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (post_id) REFERENCES posts (id),
-    FOREIGN KEY (tag_id) REFERENCES tags (id)
+    FOREIGN KEY (category_id) REFERENCES tags (id)
 );

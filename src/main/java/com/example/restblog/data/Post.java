@@ -1,12 +1,14 @@
 package com.example.restblog.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
 @Table(name="posts")
+@DynamicUpdate
 public class Post {
 
     @Id
@@ -83,5 +85,24 @@ public class Post {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Collection<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Collection<Category> categories) {
+        this.categories = categories;
+    }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", user=" + user +
+                ", categories=" + categories +
+                '}';
     }
 }

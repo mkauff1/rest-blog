@@ -3,6 +3,8 @@ package com.example.restblog.web;
 import com.example.restblog.data.Post;
 import com.example.restblog.data.User;
 import com.example.restblog.service.UserService;
+import com.example.restblog.web.dto.CreateUserDto;
+import com.example.restblog.web.dto.UpdateUserDto;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -49,6 +51,12 @@ public class UsersController {
         userService.getUserList().add(userToAdd);
     }
 
+    @PostMapping
+    public void create(@RequestBody CreateUserDto createUserDto){
+        System.out.println(createUserDto);
+//        userService.getUsersList().add(newUser);
+    }
+
     @PostMapping("{username}")
     public void addUserPost(@PathVariable String username, @RequestBody Post newPost){
         User user = userService.getUserByUsername(username);
@@ -73,6 +81,11 @@ public class UsersController {
         User userToUpdate = getById(id);
         userToUpdate.setPassword(newPassword);
         System.out.println(userToUpdate.getPassword());
+    }
+
+    @PutMapping
+    public void update(@RequestBody UpdateUserDto updateUserDto){
+        System.out.println(updateUserDto);
     }
 
     @DeleteMapping("{id}")

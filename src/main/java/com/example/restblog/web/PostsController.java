@@ -14,14 +14,10 @@ import java.util.Objects;
 public class PostsController {
 
     private final UserService userService;
-
-    public PostsController(UserService userService){
-        this.userService = userService;
-    }
-
     private final EmailService emailService;
 
-    public PostsController(EmailService emailService) {
+    public PostsController(UserService userService, EmailService emailService) {
+        this.userService = userService;
         this.emailService = emailService;
     }
 
@@ -48,6 +44,7 @@ public class PostsController {
     @PostMapping("{username}")
     public void createByUsername(@PathVariable String username, @RequestBody Post newPost){
         userService.addPost(newPost, username);
+        emailService.prepareAndSend(newPost, "New Post Created", "YeeHaw");
     }
 
 

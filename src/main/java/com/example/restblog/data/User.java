@@ -1,18 +1,30 @@
 package com.example.restblog.data;
 
-import javax.persistence.Entity;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.DynamicUpdate;
+
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
+@Table(name="users")
+@DynamicUpdate
 public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String username;
     private String email;
     private String password;
     private LocalDateTime createdAt = LocalDateTime.now();
+    @Enumerated(EnumType.STRING)
     private Role role = Role.USER;
+
+    @OneToMany(mappedBy = "user")
+    @JsonIgnoreProperties("user")
     private Collection<Post> posts = new ArrayList<>();
 
     public enum Role {USER, ADMIN};

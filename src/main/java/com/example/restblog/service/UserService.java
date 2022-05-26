@@ -2,6 +2,9 @@ package com.example.restblog.service;
 
 import com.example.restblog.data.Post;
 import com.example.restblog.data.User;
+import com.example.restblog.data.UserRepository;
+import com.example.restblog.web.dto.UpdateUserDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,8 +13,15 @@ import java.util.List;
 @Service
 public class UserService {
 
+    private final UserRepository usersRepository;
+
     private List<User> userList = setUserList();
     private List<Post> posts = setPostList();
+
+    @Autowired
+    public UserService(UserRepository usersRepository) {
+        this.usersRepository = usersRepository;
+    }
 
     public List<User> getUserList(){
         return userList;
@@ -28,15 +38,27 @@ public class UserService {
         posts.add(newPost);
     }
 
-    // TODO: .equals does not want to work
-//    public User getUserById(Long id){
-//        for (User user : userList) {
-//            if (user.getId().equals(id)){
-//                return user;
-//            }
-//        }
-//        return null;
-//    }
+    public void updateUser(UpdateUserDto updateUserDto){
+        User user = usersRepository.findById(updateUserDto.getId()).orElseThrow();
+
+        if(updateUserDto.getUsername() != null && !updateUserDto.getUsername.isEmpty()){
+            user.setUsername(updateUserDto.getUsername());
+        }
+        if(updateUserDto.getEmail() != null && !updateUserDto.getEmail.isEmpty()){
+            user.setEmail(updateUserDto.getEmail());
+        }
+        usersRepository.save(user);
+    }
+
+//     TODO: .equals does not want to work
+    public User getUserById(Long id){
+        for (User user : userList) {
+            if (user.getId().equals(id)){
+                return user;
+            }
+        }
+        return null;
+    }
 
     public User getUserByUsername(String username){
         for (User user : userList){

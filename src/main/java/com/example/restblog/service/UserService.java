@@ -3,8 +3,8 @@ package com.example.restblog.service;
 import com.example.restblog.data.Post;
 import com.example.restblog.data.User;
 import com.example.restblog.data.UserRepository;
-import com.example.restblog.web.dto.CreateUserDto;
-import com.example.restblog.web.dto.UpdateUserDto;
+import com.example.restblog.dto.CreateUserDto;
+import com.example.restblog.dto.UpdateUserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

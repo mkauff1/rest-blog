@@ -3,14 +3,13 @@ package com.example.restblog.web;
 import com.example.restblog.data.Post;
 import com.example.restblog.data.User;
 import com.example.restblog.service.UserService;
-import com.example.restblog.web.dto.CreateUserDto;
-import com.example.restblog.web.dto.UpdateUserDto;
+import com.example.restblog.dto.CreateUserDto;
+import com.example.restblog.dto.UpdateUserDto;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
 import java.util.List;
-import java.util.Objects;
 
 @CrossOrigin
 @RestController

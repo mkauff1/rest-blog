@@ -1,18 +1,25 @@
-package com.example.restblog.web.dto;
+package com.example.restblog.dto;
 
-public class CreateUserDto {
-
+public class UpdateUserDto {
+    private long id;
     private String username;
     private String email;
-    private String password;
 
-    public CreateUserDto() {
+    public UpdateUserDto() {
     }
 
-    public CreateUserDto(String username, String email, String password) {
+    public UpdateUserDto(long id, String username, String email) {
+        this.id = id;
         this.username = username;
         this.email = email;
-        this.password = password;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -31,20 +38,12 @@ public class CreateUserDto {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     @Override
     public String toString() {
-        return "CreateUserDto{" +
-                "username='" + username + '\'' +
+        return "UpdateUserDto{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
                 '}';
     }
 }
